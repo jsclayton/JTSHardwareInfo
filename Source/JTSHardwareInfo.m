@@ -30,6 +30,8 @@ static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6Plus_China = @"iPho
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6Plus       = @"iPhone7,1";
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6_China     = @"iPhone7,2*";
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6           = @"iPhone7,2";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6S          = @"iPhone8,1";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6SPlus      = @"iPhone8,2";
 
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPad                       = @"iPad1,1";
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPad_Cellular              = @"iPad1,2";
@@ -169,6 +171,12 @@ static NSString * JTSHardwareInfo_HardwareIdentifier_iPodTouch_6G       = @"iPod
     NSString *hardware = [self hardwareIdentifier];
     
     if ([hardware hasPrefix:@"iPhone"]) {
+        
+        if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_6SPlus])
+            return JTSHardwareType_iPhone_6SPlus;
+        
+        if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_6S])
+            return JTSHardwareType_iPhone_6S;
         
         if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_6_China])
             return JTSHardwareType_iPhone_6_China;
@@ -370,6 +378,12 @@ static NSString * JTSHardwareInfo_HardwareIdentifier_iPodTouch_6G       = @"iPod
             break;
             
             
+        case JTSHardwareType_iPhone_6SPlus:
+            displayName = @"iPhone 6s Plus";
+            break;
+        case JTSHardwareType_iPhone_6S:
+            displayName = @"iPhone 6s";
+            break;
         case JTSHardwareType_iPhone_6_China:
             displayName = @"iPhone 6 (China)";
             break;
