@@ -32,6 +32,9 @@ static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6_China     = @"iPho
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6           = @"iPhone7,2";
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6S          = @"iPhone8,1";
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6SPlus      = @"iPhone8,2";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_SE          = @"iPhone8,4";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_7           = @"iPhone9,1";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_7Plus       = @"iPhone9,2";
 
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPad                       = @"iPad1,1";
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPad_Cellular              = @"iPad1,2";
@@ -171,6 +174,15 @@ static NSString * JTSHardwareInfo_HardwareIdentifier_iPodTouch_6G       = @"iPod
     NSString *hardware = [self hardwareIdentifier];
     
     if ([hardware hasPrefix:@"iPhone"]) {
+        
+        if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_7Plus])
+            return JTSHardwareType_iPhone_7Plus;
+        
+        if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_7])
+            return JTSHardwareType_iPhone_7;
+        
+        if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_SE])
+            return JTSHardwareType_iPhone_SE;
         
         if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_6SPlus])
             return JTSHardwareType_iPhone_6SPlus;
@@ -378,6 +390,15 @@ static NSString * JTSHardwareInfo_HardwareIdentifier_iPodTouch_6G       = @"iPod
             break;
             
             
+        case JTSHardwareType_iPhone_7Plus:
+            displayName = @"iPhone 7 Plus";
+            break;
+        case JTSHardwareType_iPhone_7:
+            displayName = @"iPhone 7";
+            break;
+        case JTSHardwareType_iPhone_SE:
+            displayName = @"iPhone SE";
+            break;
         case JTSHardwareType_iPhone_6SPlus:
             displayName = @"iPhone 6s Plus";
             break;
