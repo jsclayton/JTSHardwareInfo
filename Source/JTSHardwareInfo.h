@@ -51,8 +51,10 @@ typedef NS_ENUM(NSInteger, JTSHardwareType) {
     JTSHardwareType_iPhone_6S,
     JTSHardwareType_iPhone_6SPlus,
     JTSHardwareType_iPhone_SE,
-    JTSHardwareType_iPhone_7,
-    JTSHardwareType_iPhone_7Plus,
+    JTSHardwareType_iPhone_7_CDMA,
+    JTSHardwareType_iPhone_7_Global,
+    JTSHardwareType_iPhone_7Plus_CDMA,
+    JTSHardwareType_iPhone_7Plus_Global,
     
     JTSHardwareType_iPodTouch_1Gen,
     JTSHardwareType_iPodTouch_2Gen,

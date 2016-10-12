@@ -10,31 +10,33 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone             = @"iPhone1,1";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_3G          = @"iPhone1,2";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_3G_China    = @"iPhone1,2*";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_3GS         = @"iPhone2,1";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_3GS_China   = @"iPhone2,1*";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_4_GSM       = @"iPhone3,1";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_4_GSM_2012  = @"iPhone3,2";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_4_CDMA      = @"iPhone3,3";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_4S          = @"iPhone4,1";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_4S_China    = @"iPhone4,1*";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5_GSM       = @"iPhone5,1";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5_Global    = @"iPhone5,2";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5C_GSM      = @"iPhone5,3";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5C_Global   = @"iPhone5,4";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5S_GSM      = @"iPhone6,1";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5S_Global   = @"iPhone6,2";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6Plus_China = @"iPhone7,1*";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6Plus       = @"iPhone7,1";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6_China     = @"iPhone7,2*";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6           = @"iPhone7,2";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6S          = @"iPhone8,1";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6SPlus      = @"iPhone8,2";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_SE          = @"iPhone8,4";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_7           = @"iPhone9,1";
-static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_7Plus       = @"iPhone9,2";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone              = @"iPhone1,1";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_3G           = @"iPhone1,2";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_3G_China     = @"iPhone1,2*";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_3GS          = @"iPhone2,1";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_3GS_China    = @"iPhone2,1*";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_4_GSM        = @"iPhone3,1";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_4_GSM_2012   = @"iPhone3,2";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_4_CDMA       = @"iPhone3,3";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_4S           = @"iPhone4,1";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_4S_China     = @"iPhone4,1*";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5_GSM        = @"iPhone5,1";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5_Global     = @"iPhone5,2";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5C_GSM       = @"iPhone5,3";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5C_Global    = @"iPhone5,4";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5S_GSM       = @"iPhone6,1";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_5S_Global    = @"iPhone6,2";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6Plus_China  = @"iPhone7,1*";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6Plus        = @"iPhone7,1";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6_China      = @"iPhone7,2*";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6            = @"iPhone7,2";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6S           = @"iPhone8,1";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_6SPlus       = @"iPhone8,2";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_SE           = @"iPhone8,4";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_7_CDMA       = @"iPhone9,1";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_7_Global     = @"iPhone9,3";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_7Plus_CDMA   = @"iPhone9,2";
+static NSString * JTSHardwareInfo_HardwareIdentifier_iPhone_7Plus_Global = @"iPhone9,4";
 
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPad                       = @"iPad1,1";
 static NSString * JTSHardwareInfo_HardwareIdentifier_iPad_Cellular              = @"iPad1,2";
@@ -174,12 +176,18 @@ static NSString * JTSHardwareInfo_HardwareIdentifier_iPodTouch_6G       = @"iPod
     NSString *hardware = [self hardwareIdentifier];
     
     if ([hardware hasPrefix:@"iPhone"]) {
+
+        if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_7Plus_Global])
+            return JTSHardwareType_iPhone_7Plus_Global;
         
-        if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_7Plus])
-            return JTSHardwareType_iPhone_7Plus;
+        if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_7Plus_CDMA])
+            return JTSHardwareType_iPhone_7Plus_CDMA;
         
-        if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_7])
-            return JTSHardwareType_iPhone_7;
+        if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_7_Global])
+            return JTSHardwareType_iPhone_7_Global;
+
+        if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_7_CDMA])
+            return JTSHardwareType_iPhone_7_CDMA;
         
         if ([hardware isEqualToString:JTSHardwareInfo_HardwareIdentifier_iPhone_SE])
             return JTSHardwareType_iPhone_SE;
@@ -390,11 +398,17 @@ static NSString * JTSHardwareInfo_HardwareIdentifier_iPodTouch_6G       = @"iPod
             break;
             
             
-        case JTSHardwareType_iPhone_7Plus:
-            displayName = @"iPhone 7 Plus";
+        case JTSHardwareType_iPhone_7Plus_Global:
+            displayName = @"iPhone 7 Plus (Global)";
             break;
-        case JTSHardwareType_iPhone_7:
-            displayName = @"iPhone 7";
+        case JTSHardwareType_iPhone_7Plus_CDMA:
+            displayName = @"iPhone 7 Plus (CDMA)";
+            break;
+        case JTSHardwareType_iPhone_7_Global:
+            displayName = @"iPhone 7 (Global)";
+            break;
+        case JTSHardwareType_iPhone_7_CDMA:
+            displayName = @"iPhone 7 (CDMA)";
             break;
         case JTSHardwareType_iPhone_SE:
             displayName = @"iPhone SE";
